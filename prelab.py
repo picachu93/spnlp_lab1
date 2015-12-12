@@ -376,45 +376,40 @@ save_as_pdf(A2_show, "out/A2show_NFA.pdf")
 #Minimize A2_show and display it
 A2_show = nfa2min_dfa(A2_show)
 save_as_pdf(A2_show, "out/A2show_MinDFA.pdf")
+
 ####################   STEP 8    ################################
 #create the union of A1 with A2 
 #which is the A12  transducer
 A12 = A1.union(A2)
-#A12.write("out/A12_bin.fst")
-#sort arc for compose compatibility
-A12.arc_sort_output() 
-#A12 = nfa2min_dfa(A12)
-#to display concatenate symbol
-#table files for greek and english
+#save_as_pdf(A12,"out/A12.pdf")
 
-#filenames = ['out/sigma_gr.txt','out/sigma_en.txt']
-#with open('out/sigma_mix.txt','w') as outfile:
-#	for frame in filenames:
-#		with open(frame) as infile:
-#			outfile.write(infile.read())
-#
-#A12.write("out/A12_bin.fst")
-#print_fst("out/A12_bin.fst","out/A12_src.fst", \
-#	  isyms="out/sigma_gr.txt" ) #instead of sigma_mix for compatibility reasons
+#sort arc for compose compatibility
+#A12 = nfa2min_dfa(A12)
+#A12 = A12.arc_sort_input()
+A12.write("out/A12_bin.fst")
 
 #compose with G closure
 #take greenglish transducer T
-G_star = G.closure()
+GI = G.union(I)
+G_star = GI.closure()
+#sort arc for compose compatibility
+#G_star = G_star.arc_sort_input()
 G_star.write("out/G_star_bin.fst")
-save_as_pdf(G_star, "out/G_star.pdf")
-T = A12.compose(G_star)
+#save_as_pdf(G_star, "out/G_star.pdf")
+#T = A12.compose(G_star)
+
 #################     STEP 9     #################################
 #create an acceptor W for each greeklish  word in 'test_greng.txt'
 en_test = parse_data(greng_test_file)     #Greeklish test words
 W = dict_acceptor(en_test,symbols = sigma_en)
-
+W.write("out/W_bin.fst")
 
 #################     STEP 10    #################################
 #compose W:greeklish test  words with T:greeklish to greek or english 
 #WT = W.comose(T)
+#WT.write("out/WT_bin.fst")
 #and find shortest path
 # WT_best = WT.shortest_path()
-
 
 ################      STEP 11    #################################
 #
