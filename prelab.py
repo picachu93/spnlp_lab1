@@ -74,7 +74,7 @@ def find_matches(words_GR, words_GRENG):
                 gr_freqs.get, greng_freqs.get
 
     gr_letter_count, greng_letter_count = 0, 0
-    #for every word in the dataset do
+    #for every word in the  train dataset do
     for i in range(len(words_GR)):
         gr_w, greng_w = words_GR[i], words_GRENG[i]
         rev_gr_w, rev_greng_w = words_GR[i][::-1], words_GRENG[i][::-1]
@@ -412,6 +412,11 @@ W.write("out/W_bin.fst")
 # WT_best = WT.shortest_path()
 
 ################      STEP 11    #################################
-#
+#compute some statistics for system accuracy
+#percentage of succesful translate
+def count_matches(word_greng, word_gr)
+#count all words in test dataset
+#count all greeklish words matching greek words
+
 
  
