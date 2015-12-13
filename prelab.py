@@ -385,18 +385,20 @@ A12 = A1.union(A2)
 
 #sort arc for compose compatibility
 #A12 = nfa2min_dfa(A12)
-#A12 = A12.arc_sort_input()
+A12.arc_sort_input()
 A12.write("out/A12_bin.fst")
 
 #compose with G closure
 #take greenglish transducer T
-GI = G.union(I)
-G_star = GI.closure()
+G_star = G.union(I)
+G_star.closure()
 #sort arc for compose compatibility
-#G_star = G_star.arc_sort_input()
+G_star.arc_sort_input()
 G_star.write("out/G_star_bin.fst")
 #save_as_pdf(G_star, "out/G_star.pdf")
 #T = A12.compose(G_star)
+#T.write("out/T_bin.fst")
+fstcompose A12_bin.fst G_star_bin.fst > T_bin.fst
 
 #################     STEP 9     #################################
 #create an acceptor W for each greeklish  word in 'test_greng.txt'
@@ -410,11 +412,12 @@ W.write("out/W_bin.fst")
 #WT.write("out/WT_bin.fst")
 #and find shortest path
 # WT_best = WT.shortest_path()
+# WT_best.top_sort()
 
 ################      STEP 11    #################################
 #compute some statistics for system accuracy
 #percentage of succesful translate
-def count_matches(word_greng, word_gr)
+#def count_matches(word_greng, word_gr)
 #count all words in test dataset
 #count all greeklish words matching greek words
 
